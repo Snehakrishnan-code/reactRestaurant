@@ -1,0 +1,99 @@
+create project - npx create-react-app restaurent
+run - cd restaurent 
+        npm start
+vs code open  - Delete  - text files.. clear app.css.. delete logo ... -> delete unwanted things to keep the file heavy
+
+get bootstrap themes - 
+    * react bootstrap... install..
+    *then, go to bootswatch react.. select theme and download bootstrap.min.css file
+    *paste the theme in project file src
+    *import these themes in index.js
+
+use react bootstrap.. to get header theme... for image uploading.. use post image link
+
+store API file(json file) in public
+
+api call in js-
+----------------
+AJAX
+----
+-XMLhttp
+-fetch
+-async await
+
+
+to store restaurantlist api
+---------------------------
+create new component
+- create state
+- use async and fetch..... //function to api call for datas inside json file
+    const getrestaurantdata = async () => {
+        await fetch('/restaurants.json')             // await is used just before the async file
+        .then(data => {data.json().then(result =>    //.json() will convert this json data to format where it is called (i.e. javascript in this case)
+            {setallrestaurant(result.restaurants)    // store data
+        })
+    })
+}
+
+useEffect hook.... used in case where we used ngOnInit.. to work the function first
+
+Redirection in react
+--------------------------
+react-router-dom    ... package used for routing .. this should be installed separately 
+terminal ->  npm i react-router-dom
+- set path for all component in app.js.. and use react-router-dom
+- in app.js ->    import{BrowserRouter,Routes,Route}.... to shorten the name use keyword "as" ..
+            BrowserRouter - put all routing need components
+            Routes - to set path for each components
+            Route - used for more than one path
+
+to use card as link---- use link component
+
+useParams - hook used to access params from component URL
+
+REDUX
+---------
+coupling --- many connections between parent and child component
+create multiple childs and grandchilds of parent component. if one component has issue.. there will be issue in the further children.
+
+props drilling ---- issue in any intermediate component can cause all other children to not work
+
+to avoid props drilling -- we need to reduce coupling and make all the components independant
+
+for this react.js introduced a new technology -- state management technology - REDUX
+Redux is an open-source JavaScript library for managing and centralizing application state. 
+It is most commonly used with libraries such as React or Angular for building user interfaces.
+
+REDUX process  -- 
+-----------------
+- create a new js file to keep the states. All the components can access the js file.
+
+- the components can access the data from the js file
+but they cant update the datas in js file
+
+- Action  -> a file with all the logic to update the state (to which the component gives dispatch request)
+- Dispatch -> method used to dispatch the logic in action file when the component need state updation 
+- Reducer -> update the datas in js file according to the payload response received from action file.
+
+libraries to apply Redux
+--------------------------
+1 REDUX
+2 REACT REDUX
+3 REDUX THUNK
+
+npm i redux react-redux redux-thunk
+
+steps
+----
+- create file in src ---- store.js
+- createStore() - method in REDUX used to create store in js file.
+                - 2 agruements --------- 1 reducer (to update the state) and 1 middleware (used to make synchronous redux into asynchronous redux)
+applyMiddleware() --- method in redux to call/apply middleware where it is required
+combineReducers()  --- there may be many reducers i.e. for each state we shall create each reducer... so to combine them we use this method
+thunk - method in redux-thunk..used to create middleware
+
+now, how to apply this---
+-------------------------
+1. create store
+2. apply the store in index.js
+        - provider   - its a tag used to pass the store (from REACT-REDUX)
