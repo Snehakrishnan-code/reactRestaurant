@@ -50,6 +50,19 @@ terminal ->  npm i react-router-dom
 to use card as link---- use link component
 
 useParams - hook used to access params from component URL
+                     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+We wrap our content first with <BrowserRouter>.
+
+Then we define our <Routes>. An application can have multiple <Routes>. Our basic example only uses one.
+
+<Route>s can be nested. The first <Route> has a path of / and renders the Layout component.
+
+The nested <Route>s inherit and add to the parent route. So the blogs path is combined with the parent and becomes /blogs.
+
+The Home component route does not have a path but has an index attribute. That specifies this route as the default route for the parent route, which is /.
+
+Setting the path to * will act as a catch-all for any undefined URLs. 
 
 REDUX
 ---------
@@ -97,3 +110,51 @@ now, how to apply this---
 1. create store
 2. apply the store in index.js
         - provider   - its a tag used to pass the store (from REACT-REDUX)
+
+
+Action folder
+----------
+create action folder in src to give the logic
+
+AXIOS - Module used to make http methods (api call)
+----------
+
+Axios allows us to communicate with APIs easily in our React apps. 
+Though this can also be achieved by other methods like fetch or AJAX, 
+Axios can provide a little more functionality that goes a long way with applications that use React. 
+Axios is a promise-based library used with Node.
+
+installation    ---- npm i axios      (all these libraries are installed in the main opening path)
+
+do api call using axios in action file
+export this function
+import in required component
+useDispatch hook----  hook used to dispatch actions in components  --- react-redux
+
+note -- when api call get is executed.. there are chances that you may get the data or may not get this data.. so consider success and failure case---- 
+//to indentify the two chances during get api
+export const R_SUCCESS="SUCCESS"
+export const R_FAIL="FAIL"........................... this is declared inside another folder called constants.. as we need to access this is more than one component..
+
+reducers
+-----------
+- new folder and new file created (for restaurantlist)
+- check if it is a success of failure
+- create reducer --- reducer function
+- the data directly comes to reducer.. so they have to store in a state.. state definition to be done 
+- check the type in dispatch .. to know if its a success or fail... // we use if... instead lets try switch-case method
+- send this state returned to store.js
+
+To access datas from store to components (useSelector-- hook)
+-------------------------------------------
+Allows you to extract data from the Redux store state, using a selector function.
+
+
+
+### `npm run build`--- to reduce the size of your project.. to keep only the necessary files.. 
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!

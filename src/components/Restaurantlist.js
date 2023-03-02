@@ -4,33 +4,27 @@ import RestCard from './RestCard';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { RestaurantListAction } from '../actions/restaurantAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Restaurantlist() {
 
-    //create state
-    const [allrestaurant, setallrestaurant] = useState([])
+    const dispatch=useDispatch()    //hook used to dispatch actions in components
 
-    //function to api call for datas inside json file
-    const getrestaurantdata = async () => {
-        await fetch('/restaurants.json')
-            .then(data => {
-                data.json().then(result =>    //.json() will convert this json data to format where it is called (i.e. javascript in this case)
-                {
-                    setallrestaurant(result.restaurants)    // store data
-                })
-            })
-    }
+    const result=useSelector(state=>state.restaurantReducer)   // call the key in store to get data
+    const {restaurantList}=result
 
-    // console.log(allrestaurant); 
+
 
     useEffect(() => {
-        getrestaurantdata()
+        dispatch(RestaurantListAction())
+        // getrestaurantdata()
     }, [])     //[] this empty arguement is given so that the data is not loaded repeatedly on page loading
 
     return (
         <Row>
             {
-                allrestaurant.map(item => (
+                restaurantList.map(item => (
                     <RestCard data={item} />      // to reduce the component length.. we shall design the cards in different component
                 ))
             }

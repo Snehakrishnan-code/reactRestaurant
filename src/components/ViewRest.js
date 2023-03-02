@@ -7,40 +7,45 @@ import Col from 'react-bootstrap/Col';
 import { Image, Button } from 'react-bootstrap';
 import Operatingtime from './Operatingtime';
 import Reviews from './Reviews';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function ViewRest() {
 
     const params = useParams()
-    // console.log(params); //check- you will get the params in this component path.. then take params.id
-    // console.log(params.id);
+    // // console.log(params); //check- you will get the params in this component path.. then take params.id
+    // // console.log(params.id);
 
 
 
-    //create state
-    const [allrestaurant, setallrestaurant] = useState([])
+    // //create state
+    // const [allrestaurant, setallrestaurant] = useState([])
 
-    //function to api call for datas inside json file
-    const getrestaurantdata = async () => {
-        await fetch('/restaurants.json')
-            .then(data => {
-                data.json().then(result =>    //.json() will convert this json data to format where it is called (i.e. javascript in this case)
-                {
-                    setallrestaurant(result.restaurants)    // store data
-                })
-            })
-    }
+    // //function to api call for datas inside json file
+    // const getrestaurantdata = async () => {
+    //     await fetch('/restaurants.json')
+    //         .then(data => {
+    //             data.json().then(result =>    //.json() will convert this json data to format where it is called (i.e. javascript in this case)
+    //             {
+    //                 setallrestaurant(result.restaurants)    // store data
+    //             })
+    //         })
+    // }
 
-    // console.log(allrestaurant); 
+    // // console.log(allrestaurant); 
 
-    const restData=allrestaurant.find(item=>item.id==params.id)
-    console.log(restData);
+ 
 
     useEffect(() => {
-        getrestaurantdata()
+        // getrestaurantdata()
     }, [])     //[] this empty arguement is given so that the data is not loaded repeatedly on page loading
 
+    const result=useSelector(state=>state.restaurantReducer)   // call the key in store to get data
+    const {restaurantList}=result  
 
 
+    const restData=restaurantList.find(item=>item.id==params.id)
+    console.log(restData);
 
     return (
         <>
